@@ -1,0 +1,33 @@
+# Служебные файлы Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+venv/
+.venv/
+
+# Артефакты сборки и бинарные файлы
+build/
+dist/
+out/
+*.bin
+*.exe
+*.o
+*.so
+
+# Архивы
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+
+# Настройки редакторов и систем
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
