@@ -5,8 +5,10 @@ import sys
 from typing import List, Optional, TextIO
 
 from uvm.assembler import assemble_file
+from uvm.binary import format_bytes, write_binary
 from uvm.errors import AssemblerError
 from uvm.intermediate import Instruction
+from uvm.machine import encode_instruction, encode_program
 
 EXIT_OK = 0
 EXIT_ASSEMBLER_ERROR = 1
@@ -26,18 +28,28 @@ def build_parser() -> argparse.ArgumentParser:
         "-t",
         "--test",
         action="store_true",
-        help="режим тестирования: вывести внутреннее представление "
-        "программы в формате полей и значений",
+        help="режим тестирования: вывести результат ассемблирования "
+        "в байтовом формате",
     )
     return parser
 
 
-def print_instructions(
+def print_machine_code(
     instructions: List[Instruction], stdout: TextIO
 ) -> None:
-    """Вывести команды в формате «A=7, B=575, C=71», по одной в строке."""
+    """Вывести машинный код в формате «0xE7, 0x47», по команде в строке."""
     for instruction in instructions:
-        print(instruction.format(), file=stdout)
+        print(format_bytes(encode_instruction(instruction)), file=stdout)
+
+
+def run(args: argparse.Namespace, stdout: TextIO) -> None:
+    """Ассемблировать программу, записать файл и вывести результат."""
+    instructions = assemble_file(args.source)
+    code = encode_program(instructions)
+    write_binary(args.output, code)
+    if args.test:
+        print_machine_code(instructions, stdout)
+    print(f"Размер двоичного файла: {len(code)} байт", file=stdout)
 
 
 def main(
@@ -50,12 +62,8 @@ def main(
     stderr = stderr or sys.stderr
     args = build_parser().parse_args(argv)
     try:
-        instructions = assemble_file(args.source)
+        run(args, stdout)
     except AssemblerError as error:
         print(f"ошибка: {error}", file=stderr)
         return EXIT_ASSEMBLER_ERROR
-    if args.test:
-        print_instructions(instructions, stdout)
-    else:
-        print(f"Ассемблировано команд: {len(instructions)}", file=stdout)
     return EXIT_OK
