@@ -1,0 +1,4 @@
+- load_const: {value: 575, reg: 71}
+- read: {reg: 41, addr: 726}
+- write: {ptr: 36, src: 85}
+- sqrt: {ptr: 48, src: 8}
