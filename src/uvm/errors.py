@@ -1,5 +1,13 @@
-"""Ошибки ассемблера."""
+"""Ошибки ассемблера и интерпретатора."""
 
 
-class AssemblerError(Exception):
+class UvmError(Exception):
+    """Базовая ошибка инструментов УВМ."""
+
+
+class AssemblerError(UvmError):
     """Ошибка в тексте программы на языке ассемблера УВМ."""
+
+
+class InterpreterError(UvmError):
+    """Ошибка чтения, декодирования или выполнения программы УВМ."""
