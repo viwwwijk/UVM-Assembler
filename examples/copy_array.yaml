@@ -1,0 +1,37 @@
+# Копирование массива из 5 элементов: адреса 10..14 -> адреса 20..24.
+# Сначала массив записывается в память по адресам 10..14, затем
+# каждый элемент читается в регистр 1, адрес приёмника кладётся в
+# регистр 2, и значение записывается в память по адресу из регистра 2.
+# Дамп для проверки: диапазон адресов 10..24.
+
+- load_const: {value: 11, reg: 1}
+- load_const: {value: 10, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 22, reg: 1}
+- load_const: {value: 11, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 33, reg: 1}
+- load_const: {value: 12, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 44, reg: 1}
+- load_const: {value: 13, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 55, reg: 1}
+- load_const: {value: 14, reg: 2}
+- write: {ptr: 2, src: 1}
+
+- read: {reg: 1, addr: 10}
+- load_const: {value: 20, reg: 2}
+- write: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 11}
+- load_const: {value: 21, reg: 2}
+- write: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 12}
+- load_const: {value: 22, reg: 2}
+- write: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 13}
+- load_const: {value: 23, reg: 2}
+- write: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 14}
+- load_const: {value: 24, reg: 2}
+- write: {ptr: 2, src: 1}
