@@ -1,6 +1,6 @@
-"""Запись машинного кода в файл и вывод его в виде байтов."""
+"""Чтение и запись машинного кода, вывод его в виде байтов."""
 
-from uvm.errors import AssemblerError
+from uvm.errors import AssemblerError, InterpreterError
 
 
 def format_bytes(code: bytes) -> str:
@@ -16,4 +16,15 @@ def write_binary(path: str, code: bytes) -> None:
     except OSError as error:
         raise AssemblerError(
             f"не удалось записать файл «{path}»: {error.strerror}"
+        ) from error
+
+
+def read_binary(path: str) -> bytes:
+    """Прочитать машинный код из двоичного файла."""
+    try:
+        with open(path, "rb") as source:
+            return source.read()
+    except OSError as error:
+        raise InterpreterError(
+            f"не удалось прочитать файл «{path}»: {error.strerror}"
         ) from error

@@ -78,3 +78,10 @@ COMMANDS: Dict[str, CommandSpec] = {
         ),
     ),
 }
+
+COMMANDS_BY_OPCODE: Dict[int, CommandSpec] = {
+    spec.opcode: spec for spec in COMMANDS.values()
+}
+
+REGISTER_COUNT = 1 << 7
+DATA_MEMORY_SIZE = 1 << 20
