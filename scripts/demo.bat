@@ -1,16 +1,16 @@
 @echo off
 set ROOT=%~dp0..
+set OUT=%TEMP%\uvm_result.bin
 
-echo ^> run.bat examples\spec_tests.yaml result.bin --test
-call "%ROOT%\run.bat" "%ROOT%\examples\spec_tests.yaml" result.bin --test
+call :show spec_tests.yaml
+call :show commented.yaml
+call :show invalid_range.yaml
+if exist "%OUT%" del "%OUT%"
+goto :eof
+
+:show
+echo ^> run.bat examples\%1 result.bin --test
+call "%ROOT%\run.bat" "%ROOT%\examples\%1" "%OUT%" --test
 echo код завершения: %ERRORLEVEL%
 echo.
-
-echo ^> run.bat examples\commented.yaml result.bin --test
-call "%ROOT%\run.bat" "%ROOT%\examples\commented.yaml" result.bin --test
-echo код завершения: %ERRORLEVEL%
-echo.
-
-echo ^> run.bat examples\invalid_range.yaml result.bin --test
-call "%ROOT%\run.bat" "%ROOT%\examples\invalid_range.yaml" result.bin --test
-echo код завершения: %ERRORLEVEL%
+goto :eof
