@@ -1,0 +1,65 @@
+# Тест sqrt(): вычисление целой части квадратного корня десяти чисел.
+# Числа записываются в память по адресам 0..9, а результаты sqrt() —
+# по адресам 10..19 (для каждого числа i результат лежит по адресу 10+i).
+# Дамп для проверки: диапазон адресов 0..19.
+# Ожидаемые результаты: 0, 1, 1, 2, 3, 4, 9, 12, 1000, 65535.
+
+- load_const: {value: 0, reg: 1}
+- load_const: {value: 0, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 10, reg: 3}
+- sqrt: {ptr: 3, src: 1}
+
+- load_const: {value: 1, reg: 1}
+- load_const: {value: 1, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 11, reg: 3}
+- sqrt: {ptr: 3, src: 1}
+
+- load_const: {value: 2, reg: 1}
+- load_const: {value: 2, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 12, reg: 3}
+- sqrt: {ptr: 3, src: 1}
+
+- load_const: {value: 4, reg: 1}
+- load_const: {value: 3, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 13, reg: 3}
+- sqrt: {ptr: 3, src: 1}
+
+- load_const: {value: 10, reg: 1}
+- load_const: {value: 4, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 14, reg: 3}
+- sqrt: {ptr: 3, src: 1}
+
+- load_const: {value: 16, reg: 1}
+- load_const: {value: 5, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 15, reg: 3}
+- sqrt: {ptr: 3, src: 1}
+
+- load_const: {value: 99, reg: 1}
+- load_const: {value: 6, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 16, reg: 3}
+- sqrt: {ptr: 3, src: 1}
+
+- load_const: {value: 144, reg: 1}
+- load_const: {value: 7, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 17, reg: 3}
+- sqrt: {ptr: 3, src: 1}
+
+- load_const: {value: 1000000, reg: 1}
+- load_const: {value: 8, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 18, reg: 3}
+- sqrt: {ptr: 3, src: 1}
+
+- load_const: {value: 4294967295, reg: 1}
+- load_const: {value: 9, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 19, reg: 3}
+- sqrt: {ptr: 3, src: 1}
