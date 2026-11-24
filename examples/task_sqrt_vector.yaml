@@ -1,0 +1,73 @@
+# Тестовая задача этапа 5: поэлементное sqrt() над вектором длины 10.
+# Вектор записывается в память по адресам 50..59, затем для каждого
+# элемента выполняется: чтение в регистр 1, адрес результата в регистр 2,
+# sqrt(регистр 1) в память по адресу из регистра 2.
+# Результат — новый вектор по адресам 60..69.
+# Дамп для проверки: диапазон адресов 50..69.
+# Исходный вектор: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100.
+# Ожидаемый результат: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+# Вектор из точных квадратов 1..100, результат — числа от 1 до 10.
+
+# Запись исходного вектора в память.
+- load_const: {value: 1, reg: 1}
+- load_const: {value: 50, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 4, reg: 1}
+- load_const: {value: 51, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 9, reg: 1}
+- load_const: {value: 52, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 16, reg: 1}
+- load_const: {value: 53, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 25, reg: 1}
+- load_const: {value: 54, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 36, reg: 1}
+- load_const: {value: 55, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 49, reg: 1}
+- load_const: {value: 56, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 64, reg: 1}
+- load_const: {value: 57, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 81, reg: 1}
+- load_const: {value: 58, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 100, reg: 1}
+- load_const: {value: 59, reg: 2}
+- write: {ptr: 2, src: 1}
+
+# Поэлементное вычисление sqrt() в новый вектор.
+- read: {reg: 1, addr: 50}
+- load_const: {value: 60, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 51}
+- load_const: {value: 61, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 52}
+- load_const: {value: 62, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 53}
+- load_const: {value: 63, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 54}
+- load_const: {value: 64, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 55}
+- load_const: {value: 65, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 56}
+- load_const: {value: 66, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 57}
+- load_const: {value: 67, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 58}
+- load_const: {value: 68, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 59}
+- load_const: {value: 69, reg: 2}
+- sqrt: {ptr: 2, src: 1}
