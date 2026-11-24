@@ -5,6 +5,7 @@
 отдельном массиве ``DATA_MEMORY_SIZE`` ячеек.
 """
 
+import math
 from typing import List
 
 from uvm.errors import InterpreterError
@@ -53,16 +54,26 @@ class Machine:
 
     def execute_write(self, instruction: Instruction) -> None:
         """Запись в память: память[регистр B] = регистр C."""
-        address = self.registers[instruction.value("B")]
+        address = self.pointer(instruction.value("B"))
+        self.data[address] = self.registers[instruction.value("C")]
+
+    def execute_sqrt(self, instruction: Instruction) -> None:
+        """Унарная операция: память[регистр B] = sqrt(регистр C).
+
+        Значения целые и неотрицательные, поэтому результат — целая
+        часть квадратного корня (наибольшее целое ``r``, что ``r*r``
+        не больше аргумента).
+        """
+        address = self.pointer(instruction.value("B"))
+        argument = self.registers[instruction.value("C")]
+        self.data[address] = math.isqrt(argument)
+
+    def pointer(self, register: int) -> int:
+        """Вернуть адрес из регистра, проверив, что он лежит в памяти."""
+        address = self.registers[register]
         if address >= DATA_MEMORY_SIZE:
             raise InterpreterError(
                 f"команда {self.counter}: адрес {address} вне памяти "
                 f"данных (размер {DATA_MEMORY_SIZE} ячеек)"
             )
-        self.data[address] = self.registers[instruction.value("C")]
-
-    def execute_sqrt(self, instruction: Instruction) -> None:
-        """Команда sqrt() будет реализована на этапе 4."""
-        raise InterpreterError(
-            f"команда {self.counter}: sqrt() пока не поддерживается"
-        )
+        return address
