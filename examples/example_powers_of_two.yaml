@@ -1,0 +1,73 @@
+# Пример 3: степени двойки от 1 до 512.
+# Вектор записывается в память по адресам 0..9, затем для каждого
+# элемента выполняется: чтение в регистр 1, адрес результата в регистр 2,
+# sqrt(регистр 1) в память по адресу из регистра 2.
+# Результат — новый вектор по адресам 10..19.
+# Дамп для проверки: диапазон адресов 0..19.
+# Исходный вектор: 1, 2, 4, 8, 16, 32, 64, 128, 256, 512.
+# Ожидаемый результат: 1, 1, 2, 2, 4, 5, 8, 11, 16, 22.
+# Корни нечётных степеней двойки — целые части иррациональных чисел.
+
+# Запись исходного вектора в память.
+- load_const: {value: 1, reg: 1}
+- load_const: {value: 0, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 2, reg: 1}
+- load_const: {value: 1, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 4, reg: 1}
+- load_const: {value: 2, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 8, reg: 1}
+- load_const: {value: 3, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 16, reg: 1}
+- load_const: {value: 4, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 32, reg: 1}
+- load_const: {value: 5, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 64, reg: 1}
+- load_const: {value: 6, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 128, reg: 1}
+- load_const: {value: 7, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 256, reg: 1}
+- load_const: {value: 8, reg: 2}
+- write: {ptr: 2, src: 1}
+- load_const: {value: 512, reg: 1}
+- load_const: {value: 9, reg: 2}
+- write: {ptr: 2, src: 1}
+
+# Поэлементное вычисление sqrt() в новый вектор.
+- read: {reg: 1, addr: 0}
+- load_const: {value: 10, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 1}
+- load_const: {value: 11, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 2}
+- load_const: {value: 12, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 3}
+- load_const: {value: 13, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 4}
+- load_const: {value: 14, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 5}
+- load_const: {value: 15, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 6}
+- load_const: {value: 16, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 7}
+- load_const: {value: 17, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 8}
+- load_const: {value: 18, reg: 2}
+- sqrt: {ptr: 2, src: 1}
+- read: {reg: 1, addr: 9}
+- load_const: {value: 19, reg: 2}
+- sqrt: {ptr: 2, src: 1}
